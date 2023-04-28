@@ -44,14 +44,14 @@ template <typename T>
 int SaveToFile(T const text, char *fileName)
 {
 
-    fstream fileStream(fileName, fstream::app);
+    fstream fileStream(fileName[20], fstream::app);
     if (fileStream.fail())
     {
         throw string("No such file");
     }
     fileStream << endl
                << getTime() << endl;
-    fileStream << text;
+    fileStream << fileName;
     fileStream.close();
     return 0;
 }
@@ -112,7 +112,7 @@ void StopReceiver(int signum)
         exit(0);
     }
 }
-int StartService(string port, char *filePath = "text.txt")
+int StartService(string port, char *filePath [20])
 {
     signal(SIGTERM, StopReceiver);
     signal(SIGHUP, StopReceiver);
